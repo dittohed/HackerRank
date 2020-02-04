@@ -1,6 +1,4 @@
 #include <stdio.h>
-
-//do pseudolosowych
 #include <stdlib.h>
 #include <time.h>
 
