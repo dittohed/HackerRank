@@ -1,6 +1,2 @@
-def my_print():
-    print(a)
-
-a = 5
-my_print()
-#czyli a jest zmienną globalną?
+mv = [int(i) for i in input().strip().split()]
+print(mv)

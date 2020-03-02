@@ -1,18 +1,68 @@
-def nextMove(player, board):
+import os
 
-    for row in reversed(range(8)):
+BOARD_SIZE = 8
+
+def nextMove(board):
+    """for row in reversed(range(8)):
         for col in range(8):
             if board[row][col] == '1':
                 #not the top row
                 if row > 0:
                     print(row - 1, col)
-                    return
+                    return"""
+    print("Your next move: ", end = '')
+    mv = [int(i) for i in input().strip().split()]
+    return mv
 
-player = int(input())
+def printBoard(board):
+    for i in range(-1, 8):
+        if i == -1:
+            print(' ', end = ' ')
+            continue
+        print(f"\033[1;32;40m{i}\033[0m", end = ' ')
+    print()
+
+    for i in range(8):
+        print(f"\033[1;32;40m{i}\033[0m", end = ' ')
+        for j in range(8):
+            print(board[i][j], end = ' ')
+        print()
+
+def boardIsEmpty(board):
+    for row in reversed(range(8)):
+        for col in range(8):
+            if board[row][col] == 1:
+                return False
+
+    return True
+
+def changeBoard(board, mv):
+    board[mv[0]][mv[1]] = (board[mv[0]][mv[1]] + 1) % 2
+
+    if mv[0] != 7:
+        board[mv[0] + 1][mv[1]] = (board[mv[0] + 1][mv[1]] + 1) % 2
+    if mv[1] != 7:
+        board[mv[0]][mv[1] + 1] = (board[mv[0]][mv[1] + 1] + 1) % 2
 
 #Read the board now. The board is a 8x8 array filled with 1 or 0.
+print("Paste the initial board:")
 board = []
 for i in range(8):
-    board.append(input())
+    board.append([int(i) for i in input()])
 
-nextMove(player, board)
+while not boardIsEmpty(board):
+    os.system("clear")
+    printBoard(board)
+    mv = nextMove(board)
+    changeBoard(board, mv)
+
+"""
+01101100
+01010101
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+"""
