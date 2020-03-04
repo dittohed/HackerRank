@@ -57,12 +57,23 @@ while not boardIsEmpty(board):
     changeBoard(board, mv)
 
 """
-01101100
-01010101
+00010011
+00010000
 00000000
 00000000
 00000000
 00000000
 00000000
 00000000
+
+POMYSŁY:
+1) zbijaj lampki, jeżeli są jakieś poza 0. wierszem (włącz nad 1)
+2) jak po moim ruchu jest 1 ruch do wygranej, to zagraj inne losowe miejsce i do 1
+3) strategia na zbicie 0. wiersza:
+    *) 1|
+       0|
+     dać w tej kolumnie na samej górze i zbijać
+    a) .1. CHYBA JEDYNY SPECJALNY PRZYPADEK (. znaczy cokolwiek)
+     dać w tej kolumnie na samej górze i zbijać dalej normalnie.
+     WAŻNE, żeby iść od początku wiersza od ostatniego wiersza
 """
