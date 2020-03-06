@@ -1,20 +1,55 @@
 import os
+import copy
 
 BOARD_SIZE = 8
 
-def nextMove(board):
-    """for row in reversed(range(8)):
+#TODO: spróbować wrzucić
+
+def next_move(board):
+    for row in reversed(range(8)):
         for col in range(8):
-            if board[row][col] == '1':
-                #not the top row
-                if row > 0:
-                    print(row - 1, col)
-                    return"""
+            if board[row][col] == 1:
+
+                if row > 0 and no_opponent_win(board, row - 1, col):
+                    # not the top row, check if not let the opponent win
+                    print("Clicking:", row - 1, col)
+                    return [row - 1, col]
+                else:
+                    # start getting rid of 0th row light or prevent your opponent win
+                    print("Clicking:", 7, col)
+                    return [7, col]
+
+    """
+    # MANUALLY
     print("Your next move: ", end = '')
     mv = [int(i) for i in input().strip().split()]
     return mv
+    """
 
-def printBoard(board):
+def no_opponent_win(board, mv1, mv2): # either I win or the opponent won't win
+    temp_board = copy.deepcopy(board)
+    change_board(temp_board, [mv1, mv2])
+
+    success = True
+    for row in reversed(range(8)):
+        for col in range(8):
+            if temp_board[row][col] == 1:
+                change_board(temp_board, [row - 1, col])
+                success = False
+                break
+        if success == False:
+            break
+        else:
+            return True
+
+    for row in reversed(range(8)):
+        for col in range(8):
+            if temp_board[row][col] == 1:
+                return True
+
+    return False
+
+def print_board(board):
     for i in range(-1, 8):
         if i == -1:
             print(' ', end = ' ')
@@ -28,7 +63,7 @@ def printBoard(board):
             print(board[i][j], end = ' ')
         print()
 
-def boardIsEmpty(board):
+def board_empty(board):
     for row in reversed(range(8)):
         for col in range(8):
             if board[row][col] == 1:
@@ -36,7 +71,7 @@ def boardIsEmpty(board):
 
     return True
 
-def changeBoard(board, mv):
+def change_board(board, mv):
     board[mv[0]][mv[1]] = (board[mv[0]][mv[1]] + 1) % 2
 
     if mv[0] != 7:
@@ -50,15 +85,16 @@ board = []
 for i in range(8):
     board.append([int(i) for i in input()])
 
-while not boardIsEmpty(board):
+while not board_empty(board):
     os.system("clear")
-    printBoard(board)
-    mv = nextMove(board)
-    changeBoard(board, mv)
+    print_board(board)
+    mv = next_move(board)
+    input()
+    change_board(board, mv)
 
 """
-00010011
-00010000
+11000000
+10000000
 00000000
 00000000
 00000000
@@ -67,7 +103,7 @@ while not boardIsEmpty(board):
 00000000
 
 POMYSŁY:
-1) zbijaj lampki, jeżeli są jakieś poza 0. wierszem (włącz nad 1)
+1) zbijaj lampki, jeżeli są jakieś poza 0. wierszem (kliknij nad 1)
 2) jak po moim ruchu jest 1 ruch do wygranej, to zagraj inne losowe miejsce i do 1
 3) strategia na zbicie 0. wiersza:
     *) 1|
