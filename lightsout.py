@@ -6,6 +6,7 @@ BOARD_SIZE = 8
 #TODO: spróbować wrzucić
 
 def next_move(board):
+    """
     for row in reversed(range(8)):
         for col in range(8):
             if board[row][col] == 1:
@@ -24,7 +25,6 @@ def next_move(board):
     print("Your next move: ", end = '')
     mv = [int(i) for i in input().strip().split()]
     return mv
-    """
 
 def no_opponent_win(board, mv1, mv2): # either I win or the opponent won't win
     temp_board = copy.deepcopy(board)
@@ -93,23 +93,19 @@ while not board_empty(board):
     change_board(board, mv)
 
 """
-11000000
-10000000
 00000000
 00000000
 00000000
 00000000
 00000000
 00000000
+11100011
+00101000
 
 POMYSŁY:
 1) zbijaj lampki, jeżeli są jakieś poza 0. wierszem (kliknij nad 1)
 2) jak po moim ruchu jest 1 ruch do wygranej, to zagraj inne losowe miejsce i do 1
 3) strategia na zbicie 0. wiersza:
-    *) 1|
-       0|
-     dać w tej kolumnie na samej górze i zbijać
-    a) .1. CHYBA JEDYNY SPECJALNY PRZYPADEK (. znaczy cokolwiek)
      dać w tej kolumnie na samej górze i zbijać dalej normalnie.
      WAŻNE, żeby iść od początku wiersza od ostatniego wiersza
 """
