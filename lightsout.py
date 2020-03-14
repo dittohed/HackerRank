@@ -3,9 +3,10 @@ import copy
 
 BOARD_SIZE = 8
 
-#TODO: spróbować wrzucić
+#TODO: jak przeszkodzić / doprowadzić do remisu
 
 def next_move(board):
+    """
     for row in reversed(range(8)):
         for col in range(8):
             if board[row][col] == 1:
@@ -18,13 +19,12 @@ def next_move(board):
                     # start getting rid of 0th row light or prevent your opponent win
                     print("Clicking:", 7, col)
                     return [7, col]
-
     """
+
     # MANUALLY
     print("Your next move: ", end = '')
     mv = [int(i) for i in input().strip().split()]
     return mv
-    """
 
 def no_opponent_win(board, mv1, mv2): # either I win or the opponent won't win
     temp_board = copy.deepcopy(board)
@@ -89,18 +89,18 @@ while not board_empty(board):
     os.system("clear")
     print_board(board)
     mv = next_move(board)
-    input()
+    #input()
     change_board(board, mv)
 
 """
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
 11000000
-10000000
-00000000
-00000000
-00000000
-00000000
-00000000
-00000000
+00010000
 
 POMYSŁY:
 1) zbijaj lampki, jeżeli są jakieś poza 0. wierszem (kliknij nad 1)
