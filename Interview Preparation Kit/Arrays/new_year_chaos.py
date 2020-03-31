@@ -1,24 +1,24 @@
+# bubble sort!
 def minimum_bribes(q):
     bribes = 0
-    reversd = 0
+    i = len(q) - 1
 
-    for i in range(len(q)):
-        diff = q[i] - i - 1 # - 1 because of 0 indexing
+    while i != 0:
+        swaps = 0
 
-        if i < len(q) - 1 and q[i] > q[i + 1]:
-            reversd += 1
-        else:
-            reversd = 0
+        for j in range(0, i):
+            if q[j] > q[j + 1]:
+                temp = q[j]
+                q[j] = q[j + 1]
+                q[j + 1] = temp
+                swaps += 1
 
-        if diff > 2:
-            print("Too chaotic")
-            return
-        elif diff > 0:
-            bribes += diff
-        elif reversd == 2:
-            print("Reversed trio found!")
-            bribes += 1
-            reversd = 0
+                if swaps > 2:
+                    print("Too chaotic")
+                    return
+
+        bribes += swaps
+        i -= 1
 
     print(bribes)
 
