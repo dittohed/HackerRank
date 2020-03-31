@@ -8,7 +8,7 @@ def minimum_bribes(q):
 
         for j in range(0, i):
             if q[j] > q[j + 1]:
-                temp = q[j]
+                temp = q[j] # TODO: use Python swap
                 q[j] = q[j + 1]
                 q[j + 1] = temp
                 swaps += 1
