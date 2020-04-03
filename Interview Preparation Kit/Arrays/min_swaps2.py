@@ -3,12 +3,13 @@ def minimum_swaps(arr):
     swaps = 0
 
     while i != 0:
-        print("i =", i)
         if arr[i] - 1 == i:
             # on the position, go left
             i -= 1
         else:
-            arr[i], arr[arr[i] - 1] = arr[arr[i] - 1], arr[i]
+            temp = arr[arr[i] - 1]
+            arr[arr[i] - 1] = arr[i]
+            arr[i] = temp
             swaps += 1
 
     return swaps
